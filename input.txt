@@ -1,0 +1,4 @@
+insert_0 12
+insert_0 7
+insert_pos 1 10
+print
