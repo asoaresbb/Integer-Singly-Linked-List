@@ -42,4 +42,3 @@ insert 20
 print
 delete 10
 ```
-# Integer-Singly-Linked-List
