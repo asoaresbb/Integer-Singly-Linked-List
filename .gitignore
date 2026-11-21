@@ -1,3 +1,4 @@
 .vscode/
+/main-isll
 /main-isll.dSYM/
-main-isll
+.DS_Store

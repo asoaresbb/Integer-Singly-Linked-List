@@ -17,7 +17,7 @@
 #include "isll.h"
 
 // Construtor
-Isll::Isll() : head(nullptr), n(0) {}
+Isll::Isll() : n(0), head(nullptr) {}
 
 // Destrutor
 Isll::~Isll()
