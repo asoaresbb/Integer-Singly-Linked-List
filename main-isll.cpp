@@ -1,19 +1,9 @@
 /*
 ** file: main-isll.cpp
 **
-** single linked list
-** UC: 21046 - EDAF @ UAb
-** e-fólio A 2024-25
-**
-** Aluno: André Bernardo
+** Reads commands from the standard input, one per line, and runs them on
+** an integer singly linked list. Unknown commands are reported.
 */
-
-// Defina neste ficheiro:
-//   A entrada/saída de dados
-//   As instâncias da classe da estrutura de dados
-//   A implementação dos comandos através dos métodos da classe
-//   Código auxiliar
-//   Não utilize variáveis globais!
 
 #include <iostream>
 #include <sstream>
@@ -35,7 +25,7 @@ int main()
          continue;
       }
 
-      // Processa o comando
+      // The first word is the command; the rest are its numbers
       stringstream ss(command);
       string cmd;
       ss >> cmd;
@@ -90,7 +80,7 @@ int main()
       }
       else
       {
-         cout << "Comando desconhecido: " << command << endl;
+         cout << "Unknown command: " << command << endl;
       }
    }
 

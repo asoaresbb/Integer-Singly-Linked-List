@@ -1,48 +1,37 @@
 /*
 ** file: isll.cpp
 **
-** single linked list
-** UC: 21046 - EDAF @ UAb
-** e-fólio A 2024-25
-**
-** Aluno: André Bernardo
+** Integer singly linked list: the list operations.
 */
-
-// Defina:
-//   Em isll.h as classes da estrutura de dados
-//   Em isll.cpp a implementação dos métodos das classes da estrutura de dados
-// ** Não altere o nome das classes nem dos atributos obrigatórios! **
 
 #include <iostream>
 #include "isll.h"
 
-// Construtor
 Isll::Isll() : n(0), head(nullptr) {}
 
-// Destrutor
 Isll::~Isll()
 {
   clear();
 }
 
-// Inserir item no início da lista
+// Insert at the start: the new node points to the old first node and becomes the head
 void Isll::insert_0(int item)
 {
-  Inode *newNode = new Inode(); // Cria um novo bebé (nó) e guarda o apontador para ele
-  newNode->item = item;         // Dá um nome (valor) ao bebé
-  newNode->next = head;         // Aponta para o bebé que estava antes no início (o antigo mais velho)
-  head = newNode;               // Agora este novo bebé é o primeiro da fila (o novo head)
-  n++;                          // Aumenta o número de bebés (nós) na lista
+  Inode *newNode = new Inode();
+  newNode->item = item;
+  newNode->next = head;
+  head = newNode;
+  n++;
 }
 
-// Inserir item em posição específica
+// Insert at position pos (0 = start, n = end); invalid positions are ignored
 void Isll::insert_pos(int pos, int item)
 {
   if (pos < 0 || pos > n)
-    return; // Posicao inválida
+    return;
 
-  Inode *newNode = new Inode; // Cria um novo bebé (nó) e guarda o apontador para ele
-  newNode->item = item;       // Dá um nome (valor) ao bebé
+  Inode *newNode = new Inode;
+  newNode->item = item;
 
   if (pos == 0)
   {
@@ -51,50 +40,52 @@ void Isll::insert_pos(int pos, int item)
   }
   else
   {
-    Inode *current = head;            // Começa no início da lista (na primeira criança da fila)
-    for (int i = 0; i < pos - 1; i++) // Avança até ao nó que está imediatamente antes da posição onde queremos inserir
+    // Walk to the node just before the position, then link the new node after it
+    Inode *current = head;
+    for (int i = 0; i < pos - 1; i++)
     {
-      current = current->next; // Vai andando pela fila, passando de criança em criança
+      current = current->next;
     }
-    newNode->next = current->next; // O novo bebé dá a mão ao que vinha a seguir ao current
-    current->next = newNode;       // O current agora passa a dar a mão ao novo bebé
+    newNode->next = current->next;
+    current->next = newNode;
   }
 
   n++;
 }
 
+// Insert at the end: walk to the last node and link the new node after it
 void Isll::insert_end(int item)
 {
-  Inode *newNode = new Inode; // Cria um novo nó (bebê)
-  newNode->item = item;       // Dá o nome ao bebê
-  newNode->next = nullptr;    // Diz que este nó é o último (não aponta para nada)
+  Inode *newNode = new Inode;
+  newNode->item = item;
+  newNode->next = nullptr;
 
-  if (head == nullptr) // Se a lista estiver vazia
+  if (head == nullptr)
   {
-    head = newNode; // O novo nó se torna o primeiro da lista
+    head = newNode;
   }
   else
   {
-    Inode *current = head;           // Começa a partir da cabeça da lista
-    while (current->next != nullptr) // Enquanto não chegarmos ao último nó
+    Inode *current = head;
+    while (current->next != nullptr)
     {
-      current = current->next; // Avança para o próximo nó
+      current = current->next;
     }
-    current->next = newNode; // O último nó agora aponta para o novo nó
+    current->next = newNode;
   }
-  n++; // Aumenta a contagem de nós
+  n++;
 }
 
-// Remover item da lista
+// Remove the first node with this value
 void Isll::remove(int item)
 {
   if (head == nullptr)
   {
-    std::cout << "Lista vazia!" << std::endl;
+    std::cout << "The list is empty." << std::endl;
     return;
   }
 
-  // Caso especial: remover o primeiro nó
+  // The first node is a special case: the head moves to the next node
   if (head->item == item)
   {
     Inode *temp = head;
@@ -104,6 +95,7 @@ void Isll::remove(int item)
     return;
   }
 
+  // Stop at the node before the one to remove, so it can be unlinked
   Inode *current = head;
   while (current->next != nullptr && current->next->item != item)
   {
@@ -112,7 +104,7 @@ void Isll::remove(int item)
 
   if (current->next == nullptr)
   {
-    std::cout << "Item não encontrado!" << std::endl;
+    std::cout << "Item not found." << std::endl;
   }
   else
   {
@@ -123,12 +115,12 @@ void Isll::remove(int item)
   }
 }
 
-// Alterar item na posição
+// Change the value at position pos (0 to n - 1)
 void Isll::alter(int pos, int item)
 {
   if (pos < 0 || pos >= n)
   {
-    std::cout << "Posição inválida!" << std::endl;
+    std::cout << "Invalid position." << std::endl;
     return;
   }
 
@@ -141,7 +133,7 @@ void Isll::alter(int pos, int item)
   current->item = item;
 }
 
-// Procurar item na lista
+// Report whether a value is in the list
 void Isll::find(int item)
 {
   Inode *current = head;
@@ -149,20 +141,20 @@ void Isll::find(int item)
   {
     if (current->item == item)
     {
-      std::cout << "Item encontrado: " << item << std::endl;
+      std::cout << "Item found: " << item << std::endl;
       return;
     }
     current = current->next;
   }
-  std::cout << "Item não encontrado!" << std::endl;
+  std::cout << "Item not found." << std::endl;
 }
 
-// Imprimir a lista
+// Print the values from start to end, separated by spaces
 void Isll::print()
 {
   if (head == nullptr)
   {
-    std::cout << "Lista vazia!" << std::endl;
+    std::cout << "The list is empty." << std::endl;
     return;
   }
 
@@ -175,7 +167,7 @@ void Isll::print()
   std::cout << std::endl;
 }
 
-// Limpar a lista
+// Free every node and leave the list empty
 void Isll::clear()
 {
   while (head != nullptr)

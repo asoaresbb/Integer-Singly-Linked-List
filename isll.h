@@ -1,17 +1,8 @@
 /*
 ** file: isll.h
 **
-** single linked list
-** UC: 21046 - EDAF @ UAb
-** e-fólio A 2024-25
-**
-** Aluno: André Bernardo
+** Integer singly linked list: the node and list types.
 */
-
-// Defina:
-//   Em isll.h as classes da estrutura de dados
-//   Em isll.cpp a implementação dos métodos das classes da estrutura de dados
-// ** Não altere o nome das classes nem dos atributos obrigatórios! **
 
 #ifndef _ISLL_H
 #define _ISLL_H
@@ -19,37 +10,32 @@
 #include <iostream>
 using namespace std;
 
-// definir nó
+// A node holds one integer and a pointer to the next node
 struct Inode
 {
-   // atributos obrigatórios
-   int item;    // informação em cada nó
-   Inode *next; // ponteiro para o próximo nó
-   // outros atributos e métodos (protótipos) livres
+   int item;    // the value stored in the node
+   Inode *next; // the next node, or nullptr for the last one
 };
 
-// definir lista simplesmente ligada
+// A singly linked list of integers, indexed from 0 to n - 1
 class Isll
 {
 private:
-   // atributos obrigatórios
-   int n;       // Dimensão atual da lista (indexação de 0 a n-1)
-   Inode *head; // Ponteiro para o primeiro nó da lista
-   // outros atributos e métodos (protótipos) livres
+   int n;       // number of nodes in the list
+   Inode *head; // first node, or nullptr when the list is empty
 
 public:
-   Isll();  // construtor
-   ~Isll(); // destrutor
+   Isll();
+   ~Isll(); // frees every node
 
-   // Métodos
-   void insert_0(int item);            // inserir no início
-   void insert_pos(int pos, int item); // inserir em posição específica
-   void insert_end(int item);          // inserir no fim
-   void remove(int item);              // remover item
-   void alter(int pos, int item);      // alterar item na posição
-   void find(int item);                // procurar item
-   void print();                       // imprimir a lista
-   void clear();                       // limpar a lista
+   void insert_0(int item);            // insert at the start
+   void insert_pos(int pos, int item); // insert at a position (0 to n)
+   void insert_end(int item);          // insert at the end
+   void remove(int item);              // remove the first node with this value
+   void alter(int pos, int item);      // change the value at a position
+   void find(int item);                // report whether a value is in the list
+   void print();                       // print the values from start to end
+   void clear();                       // remove every node
 };
 
 #endif
