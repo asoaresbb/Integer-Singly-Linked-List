@@ -27,10 +27,9 @@ int main()
    Isll list;
    string command;
 
-   while (true)
+   // Reads one command per line until the end of the input (end of file or Ctrl+D)
+   while (getline(cin, command))
    {
-      getline(cin, command);
-
       if (command.empty())
       {
          continue;
