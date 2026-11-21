@@ -1,4 +1,14 @@
-insert_0 12
-insert_0 7
+insert_0 12 7
 insert_pos 1 10
+insert_end 5 6
+print
+find 10
+find 42
+alter 0 3
+print
+remove 10
+remove 42
+print
+alter 9 1
+clear
 print
