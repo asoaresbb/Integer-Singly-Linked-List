@@ -54,6 +54,20 @@ int main()
          ss >> pos >> item;
          list.insert_pos(pos, item);
       }
+      else if (cmd == "insert_end")
+      {
+         int item;
+         while (ss >> item)
+         {
+            list.insert_end(item);
+         }
+      }
+      else if (cmd == "find")
+      {
+         int item;
+         ss >> item;
+         list.find(item);
+      }
       else if (cmd == "remove")
       {
          int item;
@@ -70,9 +84,9 @@ int main()
       }
       else if (cmd == "alter")
       {
-         int oldItem, newItem;
-         ss >> oldItem >> newItem;
-         list.alter(oldItem, newItem);
+         int pos, item;
+         ss >> pos >> item;
+         list.alter(pos, item);
       }
       else
       {
